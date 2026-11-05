@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buhalterinės ir apskaitos paslaugos</title>
+<meta name="description" content="Buhalterinė apskaita, darbo užmokestis, mokesčių deklaracijos ir finansinės ataskaitos individualiai veiklai, MB ir UAB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper: oklch(97.5% 0.012 95);
+  --paper-2: oklch(94.5% 0.016 95);
+  --rule: oklch(86% 0.03 160);
+  --ink: oklch(26% 0.045 165);
+  --ink-soft: oklch(42% 0.035 165);
+  --green: oklch(38% 0.07 165);
+  --stamp: oklch(56% 0.17 32);
+  --on-green: oklch(96% 0.02 150);
+  --display: "Fraunces", Georgia, serif;
+  --body: "Instrument Sans", "Helvetica Neue", sans-serif;
+  --gutter: clamp(16px, 5vw, 64px);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper: oklch(20% 0.02 165);
+    --paper-2: oklch(24% 0.025 165);
+    --rule: oklch(34% 0.03 165);
+    --ink: oklch(93% 0.015 95);
+    --ink-soft: oklch(78% 0.02 120);
+    --green: oklch(72% 0.09 160);
+    --stamp: oklch(70% 0.15 35);
+    --on-green: oklch(20% 0.03 165);
+  }
+}
+:root[data-theme="dark"]{
+  --paper: oklch(20% 0.02 165);
+  --paper-2: oklch(24% 0.025 165);
+  --rule: oklch(34% 0.03 165);
+  --ink: oklch(93% 0.015 95);
+  --ink-soft: oklch(78% 0.02 120);
+  --green: oklch(72% 0.09 160);
+  --stamp: oklch(70% 0.15 35);
+  --on-green: oklch(20% 0.03 165);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font:400 clamp(16px,1.05vw + 12px,18px)/1.6 var(--body);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* Antraštė */
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:20px}
+.logo{font:600 1.15rem/1 var(--display);text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--stamp)}
+nav ul{display:flex;gap:28px;list-style:none}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--ink-soft)}
+nav a:hover{color:var(--ink)}
+.nav-cta{padding:10px 18px;border:1.5px solid var(--ink);border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem}
+.nav-cta:hover{background:var(--ink);color:var(--paper)}
+
+/* Pirmas ekranas */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,96px);align-items:end;padding-block:clamp(56px,10vw,128px) clamp(56px,8vw,104px)}
+.eyebrow{font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:20px}
+h1{font:400 clamp(2.6rem,5.4vw + .5rem,5.2rem)/1.02 var(--display);letter-spacing:-.025em;font-variation-settings:"opsz" 144}
+h1 em{font-style:italic;color:var(--green)}
+.lead{max-width:34ch;margin-top:28px;font-size:1.15em;color:var(--ink-soft)}
+.actions{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin-top:40px}
+.btn{display:inline-block;padding:16px 28px;background:var(--green);color:var(--on-green);text-decoration:none;font-weight:600;border-radius:2px;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.link{font-weight:600;text-underline-offset:5px}
+
+/* Knygos lapas */
+.ledger{position:relative;background:var(--paper-2);padding:28px 28px 24px;border:1px solid var(--rule);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 39px,var(--rule) 39px 40px);background-position:0 63px}
+.ledger::before{content:"";position:absolute;top:0;bottom:0;left:64px;width:1px;background:var(--stamp);opacity:.45}
+.ledger h2{font:600 .8rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);height:35px;padding-left:52px}
+.row{display:grid;grid-template-columns:44px 1fr auto;gap:8px;height:40px;align-items:center;font-size:.95rem}
+.row .d{color:var(--ink-soft);font-size:.8rem}
+.row b{font-weight:500}
+.row.total{font-weight:600;border-top:2px solid var(--ink);margin-top:-1px}
+.stamp{position:absolute;right:-14px;bottom:-26px;transform:rotate(-8deg);border:2.5px solid var(--stamp);color:var(--stamp);
+  font:600 .8rem/1.15 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:10px 14px;text-align:center;background:var(--paper);border-radius:3px}
+
+/* Skyriai */
+section{padding:clamp(64px,9vw,120px) 0;border-top:1px solid var(--rule)}
+.head{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(24px,5vw,80px);margin-bottom:clamp(36px,5vw,64px)}
+h2.t{font:400 clamp(2rem,3vw + .6rem,3.2rem)/1.08 var(--display);letter-spacing:-.02em}
+.head p{color:var(--ink-soft);max-width:48ch;align-self:end}
+
+/* Paslaugos: knygos eilutės */
+.services{list-style:none;border-top:2px solid var(--ink)}
+.services li{display:grid;grid-template-columns:64px 1fr 1.3fr;gap:clamp(12px,3vw,40px);padding:26px 0;border-bottom:1px solid var(--rule);transition:background .3s var(--ease)}
+.services li:hover{background:var(--paper-2)}
+.services .n{font:400 1rem/1.4 var(--display);color:var(--stamp)}
+.services h3{font:600 1.15rem/1.35 var(--body)}
+.services p{color:var(--ink-soft)}
+
+/* Eiga */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:0 24px 0 0;position:relative}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);display:block;font:400 3rem/1 var(--display);color:var(--green);margin-bottom:18px}
+.step::after{content:"";position:absolute;top:24px;left:72px;right:16px;height:1px;background:var(--rule)}
+.step:last-child::after{display:none}
+.step h3{font:600 1.05rem/1.35 var(--body);margin-bottom:8px}
+.step p{color:var(--ink-soft);font-size:.95rem}
+
+/* Kam tinka */
+.fit{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule)}
+.fit > div{padding:32px clamp(20px,2.5vw,36px)}
+.fit > div + div{border-left:1px solid var(--rule)}
+.fit h3{font:400 1.6rem/1.15 var(--display);margin-bottom:6px}
+.fit .who{color:var(--ink-soft);font-size:.95rem;margin-bottom:22px}
+.fit ul{list-style:none}
+.fit li{padding:9px 0;border-top:1px dashed var(--rule);font-size:.95rem}
+.fit .mid{background:var(--green);color:var(--on-green)}
+.fit .mid .who{color:inherit;opacity:.8}
+.fit .mid li{border-color:color-mix(in oklch,var(--on-green) 30%,transparent)}
+.note{margin-top:20px;color:var(--ink-soft);font-size:.95rem}
+
+/* DUK */
+details{border-bottom:1px solid var(--rule)}
+details:first-of-type{border-top:2px solid var(--ink)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-weight:600;font-size:1.08rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 1.6rem/1 var(--display);color:var(--stamp);transition:transform .3s var(--ease)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 24px;color:var(--ink-soft);max-width:62ch}
+
+/* Kontaktai */
+.contact{background:var(--ink);color:var(--paper);border-top:0}
+.contact .head p{color:color-mix(in oklch,var(--paper) 75%,transparent)}
+.cgrid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(32px,5vw,80px)}
+.cinfo dt{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-top:22px}
+.cinfo dd{font:400 1.35rem/1.3 var(--display)}
+.cinfo a{text-decoration:none}
+.cinfo a:hover{text-decoration:underline;text-underline-offset:4px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+label{display:grid;gap:6px;font-size:.9rem;font-weight:500}
+label.full{grid-column:1 / -1}
+input,select,textarea{font:inherit;color:var(--paper);background:transparent;border:0;border-bottom:1.5px solid color-mix(in oklch,var(--paper) 40%,transparent);padding:10px 0;border-radius:0}
+select option{color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--stamp)}
+textarea{min-height:96px;resize:vertical}
+form .btn{background:var(--stamp);color:oklch(98% 0.01 60);border:0;cursor:pointer;font:600 1rem var(--body);justify-self:start}
+.fine{grid-column:1 / -1;font-size:.85rem;opacity:.65}
+
+footer{background:var(--ink);color:color-mix(in oklch,var(--paper) 60%,transparent);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px var(--gutter);border-top:1px solid color-mix(in oklch,var(--paper) 15%,transparent)}
+
+/* Judesys */
+.r{opacity:0;transform:translateY(18px);animation:in .9s var(--ease) forwards}
+.r2{animation-delay:.12s}.r3{animation-delay:.24s}.r4{animation-delay:.36s}.r5{animation-delay:.5s}
+@keyframes in{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.r{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
+
+:focus-visible{outline:2px solid var(--stamp);outline-offset:3px}
+
+/* Telefonas ir planšetė */
+@media (max-width:900px){
+  nav ul{display:none}
+  .hero,.head,.cgrid{grid-template-columns:1fr}
+  .ledger{max-width:460px}
+  .steps{grid-template-columns:1fr 1fr;row-gap:40px}
+  .step::after{display:none}
+  .fit{grid-template-columns:1fr}
+  .fit > div + div{border-left:0;border-top:1px solid var(--rule)}
+}
+@media (max-width:560px){
+  .services li{grid-template-columns:40px 1fr}
+  .services p{grid-column:2}
+  .steps{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .stamp{right:8px}
+  .nav-cta{padding:8px 12px;font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#">Apskaitos biuras<span>.</span></a>
+    <nav aria-label="Pagrindinis meniu">
+      <ul>
+        <li><a href="#paslaugos">Paslaugos</a></li>
+        <li><a href="#eiga">Kaip dirbame</a></li>
+        <li><a href="#kam">Kam tinka</a></li>
+        <li><a href="#duk">Klausimai</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#kontaktai">Susisiekti</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow r">Buhalterinės ir apskaitos paslaugos</p>
+      <h1 class="r r2">Jūsų skaičiai <em>tvarkoje</em>, jūs ramūs.</h1>
+      <p class="lead r r3">Tvarkome įmonės apskaitą, darbo užmokestį ir mokesčių deklaracijas, kad jūs galėtumėte dirbti savo darbą.</p>
+      <div class="actions r r4">
+        <a class="btn" href="#kontaktai">Gauti pasiūlymą</a>
+        <a class="link" href="#paslaugos">Peržiūrėti paslaugas</a>
+      </div>
+    </div>
+
+    <div class="ledger r r5" aria-hidden="true">
+      <h2>Mėnesio suvestinė</h2>
+      <div class="row num"><span class="d">01</span><b>Pardavimų sąskaitos</b><span>išrašytos</span></div>
+      <div class="row num"><span class="d">02</span><b>Pirkimų dokumentai</b><span>suvesti</span></div>
+      <div class="row num"><span class="d">03</span><b>Darbo užmokestis</b><span>apskaičiuotas</span></div>
+      <div class="row num"><span class="d">04</span><b>PVM deklaracija</b><span>pateikta</span></div>
+      <div class="row num"><span class="d">05</span><b>SODRA, VMI</b><span>laiku</span></div>
+      <div class="row num total"><span class="d"></span><b>Jūsų laikas</b><span>sutaupytas</span></div>
+      <div class="stamp">Patikrinta<br>kas mėnesį</div>
+    </div>
+  </div>
+
+  <section id="paslaugos">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="t">Paslaugos</h2>
+        <p>Galite perduoti visą apskaitą arba tik tą dalį, kuri atima daugiausia laiko.</p>
+      </div>
+      <ol class="services">
+        <li><span class="n">01</span><h3>Buhalterinė apskaita</h3><p>Pirminių dokumentų suvedimas, sąskaitų registrai, didžioji knyga, ilgalaikis turtas.</p></li>
+        <li><span class="n">02</span><h3>Darbo užmokestis</h3><p>Algų skaičiavimas, žiniaraščiai, atostoginiai, pranešimai SODRAI.</p></li>
+        <li><span class="n">03</span><h3>Mokesčių deklaracijos</h3><p>PVM, GPM, pelno mokestis, i.SAF ir kitos deklaracijos VMI laiku.</p></li>
+        <li><span class="n">04</span><h3>Finansinės ataskaitos</h3><p>Metinės ataskaitos, balansas, pelno (nuostolių) ataskaita, pateikimas Registrų centrui.</p></li>
+        <li><span class="n">05</span><h3>Individualios veiklos apskaita</h3><p>Pajamų ir išlaidų žurnalas, metinė deklaracija, patarimai, kaip mokėti mažiau mokesčių teisėtai.</p></li>
+        <li><span class="n">06</span><h3>Konsultacijos</h3><p>Ką rinktis: IV, MB ar UAB; kada tapti PVM mokėtoju; kaip išsimokėti sau pinigus.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="eiga">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="t">Kaip dirbame</h2>
+        <p>Nuo pirmo pokalbio iki pirmos ataskaitos paprastai praeina mažiau nei savaitė.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Pokalbis</h3><p>Išsiaiškiname, kokia jūsų veikla ir kiek dokumentų per mėnesį.</p></div>
+        <div class="step"><h3>Pasiūlymas</h3><p>Pateikiame aiškią mėnesio kainą be paslėptų mokesčių.</p></div>
+        <div class="step"><h3>Dokumentai</h3><p>Sąskaitas siunčiate el. paštu arba per bendrą aplanką, kaip jums patogiau.</p></div>
+        <div class="step"><h3>Ataskaita</h3><p>Kas mėnesį gaunate trumpą suvestinę: kas pateikta ir ką reikia sumokėti.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kam">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="t">Kam tinka</h2>
+        <p>Dirbame su smulkiu ir vidutiniu verslu. Kaina priklauso nuo dokumentų kiekio ir darbuotojų skaičiaus.</p>
+      </div>
+      <div class="fit">
+        <div>
+          <h3>Individuali veikla</h3>
+          <p class="who">Laisvai samdomiems ir pradedantiems</p>
+          <ul>
+            <li>Pajamų ir išlaidų žurnalas</li>
+            <li>Metinė GPM deklaracija</li>
+            <li>PSD ir VSD priminimai</li>
+          </ul>
+        </div>
+        <div class="mid">
+          <h3>Mažoji bendrija</h3>
+          <p class="who">Mažoms komandoms iki 10 žmonių</p>
+          <ul>
+            <li>Visa buhalterinė apskaita</li>
+            <li>PVM ir i.SAF deklaracijos</li>
+            <li>Išmokos nariams</li>
+            <li>Metinės ataskaitos</li>
+          </ul>
+        </div>
+        <div>
+          <h3>UAB</h3>
+          <p class="who">Įmonėms su darbuotojais</p>
+          <ul>
+            <li>Visa buhalterinė apskaita</li>
+            <li>Darbo užmokestis ir SODRA</li>
+            <li>Finansinės ataskaitos</li>
+            <li>Konsultacijos vadovui</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Tikslią kainą pasakome po trumpo pokalbio.</p>
+    </div>
+  </section>
+
+  <section id="duk">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="t">Dažni klausimai</h2>
+        <p>Neradote atsakymo? Parašykite, atsakysime per vieną darbo dieną.</p>
+      </div>
+      <details>
+        <summary>Ar galiu perduoti apskaitą metų viduryje?</summary>
+        <p>Taip. Perimame duomenis iš ankstesnio buhalterio ar programos ir patikriname likučius, kad nebūtų netikėtumų metų gale.</p>
+      </details>
+      <details>
+        <summary>Kaip perduoti dokumentus?</summary>
+        <p>Kaip jums patogiau: el. paštu, per bendrą „Google Drive“ aplanką arba nufotografavus telefonu.</p>
+      </details>
+      <details>
+        <summary>Ar reikia susitikti gyvai?</summary>
+        <p>Nebūtina. Dauguma klientų bendrauja el. paštu ir telefonu, bet mielai susitinkame, jei norite.</p>
+      </details>
+      <details>
+        <summary>Kas atsako už klaidas deklaracijose?</summary>
+        <p>Už mūsų paruoštų dokumentų teisingumą atsakome mes. Tai įrašome į paslaugų sutartį.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="kontaktai" class="contact">
+    <div class="wrap">
+      <div class="head">
+        <h2 class="t">Susisiekime</h2>
+        <p>Parašykite kelis sakinius apie savo veiklą, ir atsiųsime pasiūlymą.</p>
+      </div>
+      <div class="cgrid">
+        <dl class="cinfo">
+          <dt>Telefonas</dt><dd><a class="num" href="tel:+37060000000">+370 600 00000</a></dd>
+          <dt>El. paštas</dt><dd><a href="mailto:info@pavyzdys.lt">info@pavyzdys.lt</a></dd>
+          <dt>Darbo laikas</dt><dd class="num">I–V, 8.00–17.00</dd>
+        </dl>
+        <form id="forma">
+          <label>Vardas<input name="vardas" required autocomplete="name"></label>
+          <label>El. paštas<input name="pastas" type="email" required autocomplete="email"></label>
+          <label class="full">Veiklos forma
+            <select name="forma">
+              <option>Individuali veikla</option>
+              <option>Mažoji bendrija</option>
+              <option>UAB</option>
+              <option>Dar nežinau</option>
+            </select>
+          </label>
+          <label class="full">Žinutė<textarea name="zinute" placeholder="Pvz., apie 30 sąskaitų per mėnesį, 2 darbuotojai."></textarea></label>
+          <button class="btn" type="submit">Siųsti užklausą</button>
+          <p class="fine">Paspaudus atsidarys jūsų el. pašto programa su paruoštu laišku.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span class="num" id="metai">2026</span> Apskaitos biuras</span>
+    <span>Buhalterinės ir apskaitos paslaugos</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('metai').textContent = new Date().getFullYear();
+document.getElementById('forma').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var f = new FormData(this);
+  var tema = 'Užklausa: ' + f.get('forma');
+  var tekstas = 'Vardas: ' + f.get('vardas') + '\nEl. paštas: ' + f.get('pastas') +
+    '\nVeiklos forma: ' + f.get('forma') + '\n\n' + f.get('zinute');
+  location.href = 'mailto:info@pavyzdys.lt?subject=' + encodeURIComponent(tema) + '&body=' + encodeURIComponent(tekstas);
+});
+</script>
+</body>
+</html>
