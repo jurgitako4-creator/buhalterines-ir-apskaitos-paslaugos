@@ -1,1 +1,1 @@
-# animuotas-mokslas
+# buchalterinės ir apskaitos paslaugos
